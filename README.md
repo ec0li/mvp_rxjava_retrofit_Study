@@ -1,6 +1,6 @@
 # MVPStudy
-Rx笔记
 
+===========================Rx笔记 =======================================
 create ：
     操作符创建Observable，Observable通过构造方法 保存了我们传进来的OnSubscribe 说白了就是Action1.
 
@@ -67,24 +67,61 @@ merge :合并接口
                 });
 
 定时任务（timer）
+
 	`Observable.timer(2, TimeUnit.SECONDS).subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        Log.d("MainActivity", "start execute task:" + Thread.currentThread().getName());
-                    }
-                });`
+                @Override
+                public void call(Long aLong) {
+                    Log.d("MainActivity", "start execute task:" + Thread.currentThread().getName());
+                }
+            });`
 
 数据过滤（filter）
 
 界面防抖动（throttleFirst）
-    `RxView.clicks(mBtnTest2).throttleFirst(1L, TimeUnit.SECONDS).subscribe(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                Toast.makeText(MainActivity.this, "button2 clicked", Toast.LENGTH_SHORT).show();
-            }
-        });`
+
+    RxView.clicks(mBtnTest2).throttleFirst(1L, TimeUnit.SECONDS).subscribe(new Action1<Void>() {
+		@Override
+		public void call(Void aVoid) {
+			Toast.makeText(MainActivity.this, "button2 clicked", Toast.LENGTH_SHORT).sho();
+		}
+	});
 
 老接口适配(just)
+
+
+===========================Retrofit笔记 =======================================
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+
+
+call.enqueue:异步访问
+call.execute:同步访问
+
+查询参数的设置@Query
+
+@ Path的定位就是用于url的路径而不是参数
+
+post：
+表单的方式传递键值对@FormUrlEncoded
+多文件上传@PartMap
+单文件上传@Multipart
+
+添加拦截器
+    
+    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor()//log，统一的header等
+    	{
+    @Override
+    public okhttp3.Response intercept(Chain chain) throws IOException
+    {
+    return null;
+    }
+    }).build();
+
+
+
+
+
+
 
 
 
